@@ -1,153 +1,137 @@
 import javax.swing.JOptionPane;
 
 public class index {
+
+    private static String moneda1 = "COP a Dolar";
+    private static String moneda2 = "COP a Euro";
+    private static String moneda3 = "COP a Libras Esterlinas";
+    private static String moneda4 = "COP a Yen Japonés";
+    private static String moneda5 = "COP a Won Sul-Coreano";
+    private static String moneda6 = "Dolar a COP";
+    private static String moneda7 = "Euro a COP";
+    private static String moneda8 = "Libras Esterlinas a COP";
+    private static String moneda9 = "Yen Japonés a COP";
+    private static String moneda10 = "Won Sul-Coreano a COP";
+
     public static void main(String[] args) {
         String aConvertir = (JOptionPane.showInputDialog(null, "Selecciona la opcion de conversión", "Conversor",
                 JOptionPane.PLAIN_MESSAGE, null,
-                new Object[] { "Selecciona", "Conversor de moneda", "Conversor de temperatura",
-                        "Conversor de numeros a letras" },
+                new Object[] { "Selecciona", "Conversor de moneda", "Conversor de temperatura","Conversor de numeros a letras" },
                 "Selecciona")).toString();
 
         if (aConvertir == "Conversor de moneda") {
             String moneda = (JOptionPane.showInputDialog(null, "Selecciona la moneda a cambiar", "Conversor de moneda",
                     JOptionPane.PLAIN_MESSAGE, null,
                     new Object[] {
-                         "Selecciona", "COP a Dolar", "COP a Euro", "COP a Libras Esterlinas","COP a Yen Japonés", "COP a Won Sul-coreano",
-                         "Dolar a COP", "Euro a COP", "Libras Esterlinas a COP", "Yen Japonés a COP","Won sul-coreano a COP"
+                         "Selecciona", moneda1 , moneda2, moneda3,moneda4, moneda5,
+                         moneda6, moneda7, moneda8, moneda9,moneda10
                          }, "Selecciona"))
                     .toString();
 
-            valorConvertir(moneda);
+            valorConvertir(moneda, aConvertir);
 
         } else if (aConvertir == "Conversor de temperatura") {
 
-            String escala = (JOptionPane.showInputDialog(null, "Selecciona la escala", "Conversor de Temperatura",
+            String escalaTemperatura = (JOptionPane.showInputDialog(null, "Selecciona la escala", "Conversor de Temperatura",
                     JOptionPane.PLAIN_MESSAGE, null,
                     new Object[] { "Selecciona", "Celsius a Fahrenheit", "Celsius a Kelvin", "Fahrenheit a Kelvin",
                             "Fahrenheit a Celsius","Kelvin a Celsius","Kelvin a Fahrenheit" },
                     "Selecciona"))
                     .toString();
 
-            valorConvertir(escala);
+            valorConvertir(escalaTemperatura, aConvertir);
 
         } else if (aConvertir == "Conversor de numeros a letras") {
 
             JOptionPane.showMessageDialog(null, "Tu opcion de conversion es Convertir Numeros!!", "Conversion", 0,
                     null);
-
         }
-
     }
-    /*
-        - Convertir de la moneda de tu país a Dólar
-       - Convertir de la moneda de tu país  a Euros
-       - Convertir de la moneda de tu país  a Libras Esterlinas
-       - Convertir de la moneda de tu país  a Yen Japonés
-       - Convertir de la moneda de tu país  a Won sul-coreano
+    
+    public static void valorConvertir(String seleccion, String  tipoConversion) {
 
-Recordando que también debe ser posible convertir inversamente, es decir:
-
-       - Convertir de Dólar a la moneda de tu país
-       - Convertir de Euros a la moneda de tu país
-       - Convertir de Libras Esterlinas a la moneda de tu país
-       - Convertir de Yen Japonés a la moneda de tu país
-       - Convertir de Won sul-coreano a la moneda de tu país
-       */
-
-    public static void valorConvertir(String moneda) {
-
-        double valor = Integer.parseInt(JOptionPane.showInputDialog(null, "introduce el valor a convertir", moneda,
+        double valor = Integer.parseInt(JOptionPane.showInputDialog(null, "introduce el valor a convertirCOP", seleccion,
                 JOptionPane.PLAIN_MESSAGE));
-        
-         switch(moneda){
-             case "COP a dolar":
-                 conversionCOPDolar(valor);
-                 break;
-            case "COP euro":
-                conversionCOPEuro(valor);
-                break;
-            case "COP a Libras Esterlinas":
-                conversionCOPLibrasEsterlinas(valor);
-                break;
-            case "COP a Yen Japonés":
-                conversionCOPYenJapones(valor);
-                break;
-            case "COP a Won sul-coreano":
-                conversionCOPWonSulCoreano(valor);
-                break;
-            case "Dolar a COP":
-                conversionDolarCOP(valor);
-                break;
-            case "Euro a COP":
-                conversionEuroCOP(valor);
-                break;
-            case "Libras Esterlinas a COP":
-                conversionLibrasEsterlinasCOP(valor);
-                break;
-            case "Yen Japonés a COP":
-                conversionYenJaponésCOP(valor);
-                break;
-            case "Won sul-coreano a COP":
-                conversionWonSulCoreanoCOP(valor);
-                break;
+        if (tipoConversion == "Conversor de moneda"){
+            switch (seleccion) {
+                case "COP a Dolar":
+                    convertirCOP(valor, 4809);
+                    break;
+                case "COP Euro":
+                    convertirCOP(valor, 5099);
+                    break;
+                case "COP a Libras Esterlinas":
+                    convertirCOP(valor, 5785.68);
+                    break;
+                case "COP a Yen Japonés":
+                    convertirCOP(valor, 35.37);
+                    break;
+                case "COP a Won Sul-Coreano":
+                    convertirCOP(valor, 3.65);
+                    break;
+                case "Dolar a COP":
+                    convertirACOP(valor, 4809);
+                    break;
+                case "Euro a COP":
+                    convertirACOP(valor, 5099);
+                    break;
+                case "Libras Esterlinas a COP":
+                    convertirACOP(valor, 5785.68);
+                    break;
+                case "Yen Japonés a COP":
+                    convertirACOP(valor, 35.37);
+                    break;
+                case "Won Sul-Coreano a COP":
+                    convertirACOP(valor, 3.65);
+                    break;
+            }
+            
+        } else if (tipoConversion == "Conversor de temperatura") {
+            switch (seleccion) {
+                case "Celsius a Fahrenheit":
+                    double conversionCF = ((valor * (9/5))+ 32);
+                    mostrarConversion(conversionCF);
+                    break;
+                case "Celsius a Kelvin":
+                    double conversionCK = valor + 273;
+                    mostrarConversion(conversionCK);
+                    break;
+                case "Fahrenheit a Kelvin":
+                    double conversionFK = 5/9*(valor+459.67);
+                    mostrarConversion(conversionFK);
+                    break;
+                case "Fahrenheit a Celsius":
+                    double conversionFC = 5/9*(valor-32);
+                    mostrarConversion(conversionFC);
+                    break;
+                case "Kelvin a Celsius":
+                    double conversionKC = valor -273.15;
+                    mostrarConversion(conversionKC);
+                    break;
+                case "Kelvin a Fahrenheit":
+                    double conversionKF = 9 / (5 * valor) - 459.67;
+                    mostrarConversion(conversionKF);
+                    break;
+            }
         }
     }
 
-    private static void conversionCOPDolar(Double valor) {
-        double conversion = valor / 4809;
-        mostrarConversion(conversion);
-    }
-    
-    private static void conversionCOPEuro(Double valor) {
-        double conversion = valor / 5099;
-        mostrarConversion(conversion);
-    }
-    
-    private static void conversionCOPLibrasEsterlinas(double valor) {
-        double conversion = valor / 5808;
-        mostrarConversion(conversion);
-    }
-    
-    private static void conversionCOPYenJapones(double valor) {
-        double conversion = valor / 35.37 ;
-        mostrarConversion(conversion);
-    }
-    
-    private static void conversionCOPWonSulCoreano(double valor) {
-        double conversion = valor / 3.65;
-        mostrarConversion(conversion);
-    }
-    
-    private static void conversionDolarCOP(double valor) {
-        double conversion = valor * 4809;
-        mostrarConversion(conversion);
+    private static void convertirCOP(double valor, double tasa) {
+        double conversion = valor / tasa;
+        double resultado = (double) Math.round(conversion * 100d) / 100;
+        mostrarConversion(resultado);
     }
 
-    private static void conversionEuroCOP(double valor) {
-        double conversion = valor * 5099;
-        mostrarConversion(conversion);
+    private static void convertirACOP(double valor, double tasa) {
+        double conversion = valor * tasa;
+        double resultado = (double) Math.round(conversion * 100d) / 100;
+        mostrarConversion(resultado);
     }
     
-    private static void conversionLibrasEsterlinasCOP(double valor) {
-        double conversion = valor * 5808;
-        mostrarConversion(conversion);
-    }
-    
-    private static void conversionYenJaponésCOP(double valor) {
-        double conversion = valor * 35.37;
-        mostrarConversion(conversion);
-    }
-    
-    private static void conversionWonSulCoreanoCOP(double valor) {
-        double conversion = valor / 3.65;
-        mostrarConversion(conversion);
-    }
-
 
     //Metodo de Muestra resultado de conversion
     private static void mostrarConversion(Double conversion) {
         JOptionPane.showMessageDialog(null, "El valor de conversion es: " + conversion, "conversion",
                 JOptionPane.PLAIN_MESSAGE);
     }
-
 }
