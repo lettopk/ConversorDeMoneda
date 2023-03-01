@@ -12,6 +12,17 @@ public class index {
     private static String moneda8 = "Libras Esterlinas a COP";
     private static String moneda9 = "Yen Japonés a COP";
     private static String moneda10 = "Won Sul-Coreano a COP";
+    
+    private final static String[] UNIDADES = { "cero", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ",
+            "nueve " };
+    
+    private final static String[] ESPECIALES = { "diez ", "once ", "doce ", "trece ", "catorce ", "quince ",
+            "dieciseis ", "diecisiete ", "dieciocho ", "diecinueve " };
+    private final static String[] DECENAS = { "","", "veinti ", "treinta ", "cuarenta ",
+            "cincuenta ", "sesenta ", "setenta ", "ochenta ", "noventa " };
+    private final static String[] CENTENAS = { "", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ",
+            "seiscientos ",
+            "setecientos ", "ochocientos ", "novecientos " };
 
     public static void main(String[] args) {
         String aConvertir = (JOptionPane.showInputDialog(null, "Selecciona la opcion de conversión", "Conversor",
@@ -43,14 +54,14 @@ public class index {
 
         } else if (aConvertir == "Conversor de numeros a letras") {
 
-            JOptionPane.showMessageDialog(null, "Tu opcion de conversion es Convertir Numeros!!", "Conversion", 0,
-                    null);
+            valorConvertir(aConvertir, aConvertir);
+            
         }
     }
     
     public static void valorConvertir(String seleccion, String  tipoConversion) {
 
-        double valor = Integer.parseInt(JOptionPane.showInputDialog(null, "introduce el valor a convertirCOP", seleccion,
+        double valor = Integer.parseInt(JOptionPane.showInputDialog(null, "introduce el valor a convertir", seleccion,
                 JOptionPane.PLAIN_MESSAGE));
         if (tipoConversion == "Conversor de moneda"){
             switch (seleccion) {
@@ -113,7 +124,104 @@ public class index {
                     mostrarConversion(conversionKF);
                     break;
             }
+        } else if (tipoConversion == "Conversor de numeros a letras") {
+            
+            String literal = "";
+            
+            if (valor < 10) {
+                literal = getUnidades((int) valor);
+                mostrarlieral(literal);
+            } else if (valor < 20) {
+                literal = getEspeciales((int) valor);
+                mostrarlieral(literal);
+            }else if (valor < 100){
+                literal = getDecenas((int) valor);
+                mostrarlieral(literal);
+            } else if (valor < 1000) {
+                literal = getCentenas((int) valor);
+                mostrarlieral(literal);
+            } else if (valor < 1000000) {
+                literal = getMiles((int) valor);
+                mostrarlieral(literal);
+            } else {
+                mostrarlieral("numero demaciado grande"); ;
+            }
         }
+    }
+    
+
+
+    private static String getMiles(int valor) {
+        if (valor > 999) {
+            if (valor == 1000) {
+                return "mil";
+            } else {
+                int miles = Math.round(valor/ 1000);
+                int centenas = Math.round((valor - (miles * 1000)));
+                return getUnidades(miles)+"mil "+ getCentenas(centenas);
+            }
+        }return null;
+    }
+
+    private static String getCentenas(int valor) {
+        if (valor > 99) {// es centena
+            if (valor == 100) {// caso especial
+                return " cien ";
+            } else {
+                return CENTENAS[(Math.round(valor / 100))] + getDecenas((valor % 100));
+            }
+        } 
+        return null;
+    }
+
+    private static String getDecenas(int valor) {
+        String literal = "";
+        if (valor < 100 && valor % 10 == 0){   
+            int index = (int) ((valor / 10) );
+            literal = DECENAS[index];
+            return literal;
+        } else if (valor < 100) {
+            int dIndex = (int) ((valor / 10) );
+            int uIndex = (int) (valor % 10);
+            if (valor < 30) {
+                if (valor < 20) {
+                return getEspeciales(valor);
+                } else {
+                    return literal = DECENAS[dIndex] + UNIDADES[uIndex];
+                } 
+            } else {
+                return literal = DECENAS[dIndex] + "y " + UNIDADES[uIndex];
+            }
+        } else {
+            return "false";
+        }
+    }
+
+    private static String getEspeciales(int valor) {
+        String literal = ESPECIALES[(((int) valor) - 10)];
+        return literal;
+    }
+
+    private static String getUnidades(int valor) {
+        if (valor < 10) {
+            String literal = UNIDADES[(int) valor];
+            return literal;
+        } else if (valor < 100) {
+            if (valor < 20) {
+                return getEspeciales(valor);
+            } else {
+                return getDecenas(valor);
+            } 
+        } else if (valor < 1000) {
+            return getCentenas(valor);
+        } else {
+            return "numero demaciado grande";
+        }
+    }
+
+    private static void mostrarlieral(String literal) {
+        JOptionPane.showMessageDialog(null, "El valor de conversion es: " + literal, "conversion",
+                JOptionPane.PLAIN_MESSAGE);
     }
 
     private static void convertirCOP(double valor, double tasa) {
