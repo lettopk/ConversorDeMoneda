@@ -1,7 +1,11 @@
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class index {
 
+    private static boolean iniciar = true;
+    private static String aConvertir="";
     private static String moneda1 = "COP a Dolar";
     private static String moneda2 = "COP a Euro";
     private static String moneda3 = "COP a Libras Esterlinas";
@@ -25,28 +29,46 @@ public class index {
             "setecientos ", "ochocientos ", "novecientos " };
 
     public static void main(String[] args) {
-        String aConvertir = (JOptionPane.showInputDialog(null, "Selecciona la opcion de conversión", "Conversor",
-                JOptionPane.PLAIN_MESSAGE, null,
-                new Object[] { "Selecciona", "Conversor de moneda", "Conversor de temperatura","Conversor de numeros a letras" },
-                "Selecciona")).toString();
+        while (iniciar == true) {
+                aConvertir = (JOptionPane.showInputDialog(null, "Selecciona la opcion de conversión", "Conversor",
+                    JOptionPane.PLAIN_MESSAGE, /*icono("noun-inverter-66282.png",40,40)*/null,
+                    new Object[] { "Selecciona", "Conversor de moneda", "Conversor de temperatura",
+                            "Conversor de numeros a letras" },
+                    "Selecciona")).toString();
+                opcionConversion(aConvertir);
+        }
+    }
+    
+    /*
+     * private static Icon icono(String path, int width, int heigth) {
+     * final Icon img = new ImageIcon(new ImageIcon(
+     * getClass().getResource(path)).getImage()
+     * .getScaledInstance(width, heigth, java.awt.Image.SCALE_SMOOTH));
+     * return img;
+     * }
+     */
+    
 
+    private static void opcionConversion(String aConvertir) {
         if (aConvertir == "Conversor de moneda") {
-            String moneda = (JOptionPane.showInputDialog(null, "Selecciona la moneda a cambiar", "Conversor de moneda",
+            String moneda = (JOptionPane.showInputDialog(null, "Selecciona la moneda a cambiar",
+                    "Conversor de moneda",
                     JOptionPane.PLAIN_MESSAGE, null,
                     new Object[] {
-                         "Selecciona", moneda1 , moneda2, moneda3,moneda4, moneda5,
-                         moneda6, moneda7, moneda8, moneda9,moneda10
-                         }, "Selecciona"))
+                            "Selecciona", moneda1, moneda2, moneda3, moneda4, moneda5,
+                            moneda6, moneda7, moneda8, moneda9, moneda10
+                    }, "Selecciona"))
                     .toString();
 
             valorConvertir(moneda, aConvertir);
 
         } else if (aConvertir == "Conversor de temperatura") {
 
-            String escalaTemperatura = (JOptionPane.showInputDialog(null, "Selecciona la escala", "Conversor de Temperatura",
+            String escalaTemperatura = (JOptionPane.showInputDialog(null, "Selecciona la escala",
+                    "Conversor de Temperatura",
                     JOptionPane.PLAIN_MESSAGE, null,
                     new Object[] { "Selecciona", "Celsius a Fahrenheit", "Celsius a Kelvin", "Fahrenheit a Kelvin",
-                            "Fahrenheit a Celsius","Kelvin a Celsius","Kelvin a Fahrenheit" },
+                            "Fahrenheit a Celsius", "Kelvin a Celsius", "Kelvin a Fahrenheit" },
                     "Selecciona"))
                     .toString();
 
@@ -55,10 +77,10 @@ public class index {
         } else if (aConvertir == "Conversor de numeros a letras") {
 
             valorConvertir(aConvertir, aConvertir);
-            
+
         }
     }
-    
+
     public static void valorConvertir(String seleccion, String  tipoConversion) {
 
         double valor = Integer.parseInt(JOptionPane.showInputDialog(null, "introduce el valor a convertir", seleccion,
@@ -68,7 +90,7 @@ public class index {
                 case "COP a Dolar":
                     convertirCOP(valor, 4809);
                     break;
-                case "COP Euro":
+                case "COP a Euro":
                     convertirCOP(valor, 5099);
                     break;
                 case "COP a Libras Esterlinas":
@@ -144,7 +166,7 @@ public class index {
                 literal = getMiles((int) valor);
                 mostrarlieral(literal);
             } else {
-                mostrarlieral("numero demaciado grande"); ;
+                mostrarlieral("numero demaciado grande");
             }
         }
     }
@@ -239,7 +261,16 @@ public class index {
 
     //Metodo de Muestra resultado de conversion
     private static void mostrarConversion(Double conversion) {
-        JOptionPane.showMessageDialog(null, "El valor de conversion es: " + conversion, "conversion",
-                JOptionPane.PLAIN_MESSAGE);
+        String[] botones = { "Inicio", "Continuar con "+aConvertir, "Cancelar" };
+        int opciones = JOptionPane.showOptionDialog(null, "El valor de conversion es: " + conversion, "conversion",
+                JOptionPane.PLAIN_MESSAGE, 0, null, botones, "Inicio");
+        if (opciones == 0) {
+            iniciar = true;
+        } else if (opciones == 1) {
+            iniciar = false;
+            opcionConversion(aConvertir);
+        } else if (opciones == 2) {
+            iniciar = false;
+        }
     }
 }
