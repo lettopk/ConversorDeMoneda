@@ -1,11 +1,10 @@
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+//import javax.swing.Icon;
+//import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class index {
-
     private static boolean iniciar = true;
-    private static String aConvertir="";
+    private static String aConvertir;
     private static String moneda1 = "COP a Dolar";
     private static String moneda2 = "COP a Euro";
     private static String moneda3 = "COP a Libras Esterlinas";
@@ -16,18 +15,18 @@ public class index {
     private static String moneda8 = "Libras Esterlinas a COP";
     private static String moneda9 = "Yen Japonés a COP";
     private static String moneda10 = "Won Sul-Coreano a COP";
-    
-    private final static String[] UNIDADES = { "cero", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ",
+    private final static String[] UNIDADES = { "cero", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ",
+            "ocho ",
             "nueve " };
-    
+
     private final static String[] ESPECIALES = { "diez ", "once ", "doce ", "trece ", "catorce ", "quince ",
             "dieciseis ", "diecisiete ", "dieciocho ", "diecinueve " };
-    private final static String[] DECENAS = { "","", "veinti ", "treinta ", "cuarenta ",
+    private final static String[] DECENAS = { "", "", "veinti ", "treinta ", "cuarenta ",
             "cincuenta ", "sesenta ", "setenta ", "ochenta ", "noventa " };
-    private final static String[] CENTENAS = { "", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ",
+    private final static String[] CENTENAS = { "", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ",
+            "quinientos ",
             "seiscientos ",
             "setecientos ", "ochocientos ", "novecientos " };
-
     public static void main(String[] args) {
         while (iniciar == true) {
                 aConvertir = (JOptionPane.showInputDialog(null, "Selecciona la opcion de conversión", "Conversor",
@@ -39,14 +38,13 @@ public class index {
         }
     }
     
-    /*
-     * private static Icon icono(String path, int width, int heigth) {
-     * final Icon img = new ImageIcon(new ImageIcon(
-     * getClass().getResource(path)).getImage()
-     * .getScaledInstance(width, heigth, java.awt.Image.SCALE_SMOOTH));
-     * return img;
-     * }
-     */
+    
+     /*private static Icon icono(String path, int width, int heigth) {
+     final Icon img = new ImageIcon(new ImageIcon(
+     getClass().getResource(path)).getImage()
+     .getScaledInstance(width, heigth, java.awt.Image.SCALE_SMOOTH));
+     return img;
+     }*/
     
 
     private static void opcionConversion(String aConvertir) {
