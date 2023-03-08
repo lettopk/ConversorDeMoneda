@@ -33,21 +33,21 @@ public class ConversorLiteral extends conversor{
             
             if (valor < 10) {
                 literal = getUnidades((int) valor);
-                mostrarLiteral(literal);
+                setLiteral(literal);
             } else if (valor < 20) {
                 literal = getEspeciales((int) valor);
-                mostrarLiteral(literal);
+                setLiteral(literal);
             }else if (valor < 100){
                 literal = getDecenas((int) valor);
-                mostrarLiteral(literal);
+                setLiteral(literal);
             } else if (valor < 1000) {
                 literal = getCentenas((int) valor);
-                mostrarLiteral(literal);
+                setLiteral(literal);
             } else if (valor < 1000000) {
                 literal = getMiles((int) valor);
-                mostrarLiteral(literal);
+                setLiteral(literal);
             } else {
-                mostrarLiteral("numero demaciado grande");
+                setLiteral("numero demaciado grande");
             }
         }    
         

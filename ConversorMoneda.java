@@ -2,7 +2,9 @@ import javax.swing.JOptionPane;
 
 public class ConversorMoneda extends conversor {
     private String moneda;
+    private Double Resultado;
     
+
     final String moneda1 = "COP a Dolar";
     final String moneda2 = "COP a Euro";
     final String moneda3 = "COP a Libras Esterlinas";
@@ -28,6 +30,14 @@ public class ConversorMoneda extends conversor {
 
     public String getMoneda() {
         return moneda;
+    }
+
+    public Double getResultado() {
+        return Resultado;
+    }
+
+    public void setResultado(Double resultado) {
+        Resultado = resultado;
     }
     
     public void monedaConvertir(double valor,String seleccion) {
@@ -68,13 +78,13 @@ public class ConversorMoneda extends conversor {
     private void convertirCOP(double valor, double tasa) {
         double conversion = valor / tasa;
         double resultado = (double) Math.round(conversion * 100d) / 100;
-        mostrarConversion(resultado);
+        setResultado(resultado);
     }
 
     private void convertirACOP(double valor, double tasa) {
         double conversion = valor * tasa;
         double resultado = (double) Math.round(conversion * 100d) / 100;
-        mostrarConversion(resultado);
+        setResultado(resultado);
     }
        
     

@@ -7,7 +7,7 @@ public class conversor {
     public String aConvertir ="";
     
     public void setaConvertir(boolean inicio) {
-        while (inicio) {
+        while (isIniciar()) {
             this.aConvertir = (JOptionPane.showInputDialog(null, "Selecciona la opcion de conversión", "Conversor",
                     JOptionPane.PLAIN_MESSAGE, icono("noun-inverter-66282.png", 40, 40),
                     new Object[] { "Selecciona", "Conversor de moneda", "Conversor de temperatura",
@@ -20,12 +20,15 @@ public class conversor {
         if (aConvertir == "Conversor de moneda") {
             ConversorMoneda moneda = new ConversorMoneda();
             moneda.setMoneda();
+            mostrarConversion(moneda.getResultado());
         } else if (aConvertir == "Conversor de temperatura") {
             ConversorTemperatura escala = new ConversorTemperatura();
             escala.setEscala();
+            mostrarConversion(escala.getResultadoEscala());
         } else if (aConvertir == "Conversor de numeros a letras") {
             ConversorLiteral numero = new ConversorLiteral();
             numero.setNumero(valorConvertir(aConvertir));
+            mostrarLiteral(numero.getLiteral());
         }
     }
     
@@ -35,9 +38,25 @@ public class conversor {
     }
     
     public double valorConvertir(String seleccion) {
-        double valor = Integer.parseInt(JOptionPane.showInputDialog(null, "introduce el valor a convertir", seleccion,
-                JOptionPane.PLAIN_MESSAGE));
+        Boolean isNumero = false;
+        Double valor = (double) 0; 
+        while(!isNumero){
+            try {
+                valor = (double) Integer
+                        .parseInt(JOptionPane.showInputDialog(null, "introduce el valor a convertir", seleccion,
+                                JOptionPane.PLAIN_MESSAGE));
+                // Si no hay errores, el valor es un numero
+                isNumero = true;
+                
+            } catch (NumberFormatException e) {
+                // Si hay errores, el valor no es un numero
+                JOptionPane.showMessageDialog(null, "El valor ingresado no es un número", seleccion, 0);
+            }
+        }
         return valor;
+        
+        
+        
     }
     
     public boolean isIniciar() {
@@ -54,7 +73,7 @@ public class conversor {
     
     
     public void mostrarLiteral(String literal) {
-        String[] botones = { "Inicio", "Continuar con " + getaConvertir(), "Cancelar" };
+        String[] botones = { "Inicio", "Continuar con " + getaConvertir(), "Finalizar" };
         int opciones = JOptionPane.showOptionDialog(null, "El valor de conversion es: " + literal, "conversion",
                 JOptionPane.PLAIN_MESSAGE, 0, null, botones, "Inicio");
         
@@ -63,7 +82,7 @@ public class conversor {
     }
     
     public void mostrarConversion(Double conversion) {
-        String[] botones = { "Inicio", "Continuar con " + getaConvertir(), "Cancelar" };
+        String[] botones = { "Inicio", "Continuar con " + getaConvertir(), "Finalizar" };
         int opciones = JOptionPane.showOptionDialog(null, "El valor de conversion es: " + conversion, "conversion",
                 JOptionPane.PLAIN_MESSAGE, 0, null, botones, "Inicio");
         repetir(opciones);
@@ -78,6 +97,8 @@ public class conversor {
             opcionConversion(getaConvertir());
         } else if (opciones == 2) {
             setIniciar(false);
+            JOptionPane.showMessageDialog(null, "El programa se finalizó", "Finalizar", 2);
+
         }
     }
     
